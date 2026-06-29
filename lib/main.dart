@@ -5,6 +5,7 @@ import 'app.dart';
 import 'models/grade.dart';
 import 'models/student.dart';
 import 'models/subject.dart';
+import 'services/subject_service.dart';
 import 'utils/constants.dart';
 
 Future<void> main() async {
@@ -19,6 +20,8 @@ Future<void> main() async {
   await Hive.openBox<Student>(AppConstants.studentsBox);
   await Hive.openBox<Subject>(AppConstants.subjectsBox);
   await Hive.openBox<Grade>(AppConstants.gradesBox);
+
+  await SubjectService().initDefaults();
 
   runApp(const EBulletinApp());
 }
