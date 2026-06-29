@@ -63,8 +63,9 @@ void main() {
       find.descendant(of: find.byType(Drawer), matching: find.text('Eleves')),
     );
     await tester.pumpAndSettle();
+    expect(find.text('Eleves (0)'), findsOneWidget);
     expect(
-      find.text("L'ecran de gestion des eleves sera implemente dans EB-6."),
+      find.text('Aucun eleve. Appuyez sur + pour en ajouter.'),
       findsOneWidget,
     );
 
