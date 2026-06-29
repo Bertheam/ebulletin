@@ -84,9 +84,7 @@ void main() {
       find.descendant(of: find.byType(Drawer), matching: find.text('Notes')),
     );
     await tester.pumpAndSettle();
-    expect(
-      find.text("L'ecran de saisie des notes sera implemente dans EB-8."),
-      findsOneWidget,
-    );
+    expect(find.text('Notes (0)'), findsOneWidget);
+    expect(find.text('Aucune note pour Trimestre 1'), findsOneWidget);
   });
 }
