@@ -5,6 +5,7 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentRoute = ModalRoute.of(context)?.settings.name ?? '/';
     final colorScheme = Theme.of(context).colorScheme;
 
     return Drawer(
@@ -37,31 +38,36 @@ class AppDrawer extends StatelessWidget {
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
-              children: const [
+              children: [
                 _DrawerItem(
                   icon: Icons.dashboard_outlined,
                   label: 'Tableau de bord',
                   route: '/',
+                  isActive: currentRoute == '/',
                 ),
                 _DrawerItem(
                   icon: Icons.people_outline,
                   label: 'Eleves',
                   route: '/students',
+                  isActive: currentRoute == '/students',
                 ),
                 _DrawerItem(
                   icon: Icons.book_outlined,
                   label: 'Matieres',
                   route: '/subjects',
+                  isActive: currentRoute == '/subjects',
                 ),
                 _DrawerItem(
                   icon: Icons.description_outlined,
                   label: 'Notes',
                   route: '/grades',
+                  isActive: currentRoute == '/grades',
                 ),
                 _DrawerItem(
                   icon: Icons.bar_chart_outlined,
                   label: 'Bulletins',
                   route: '/report-cards',
+                  isActive: currentRoute == '/report-cards',
                 ),
               ],
             ),
@@ -69,7 +75,7 @@ class AppDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16),
             child: Text(
-              'Phase I',
+              'v1.0.0 - Phase I',
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
@@ -84,16 +90,16 @@ class _DrawerItem extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.route,
+    required this.isActive,
   });
 
   final IconData icon;
   final String label;
   final String route;
+  final bool isActive;
 
   @override
   Widget build(BuildContext context) {
-    final currentRoute = ModalRoute.of(context)?.settings.name ?? '/';
-    final isActive = currentRoute == route;
     final colorScheme = Theme.of(context).colorScheme;
 
     return ListTile(
@@ -105,6 +111,7 @@ class _DrawerItem extends StatelessWidget {
             : null,
       ),
       selected: isActive,
+      selectedTileColor: colorScheme.primary.withValues(alpha: 0.1),
       onTap: () {
         Navigator.pop(context);
         if (!isActive) {

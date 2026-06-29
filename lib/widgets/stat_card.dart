@@ -22,7 +22,7 @@ class StatCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 32, color: color),
+            Icon(icon, size: 36, color: color),
             const SizedBox(height: 12),
             Text(
               '$value',
@@ -33,7 +33,7 @@ class StatCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            Text(label),
+            Text(label, style: const TextStyle(color: Colors.grey)),
           ],
         ),
       ),
