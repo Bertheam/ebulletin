@@ -47,13 +47,13 @@ class AppDrawer extends StatelessWidget {
                 ),
                 _DrawerItem(
                   icon: Icons.people_outline,
-                  label: 'Eleves',
+                  label: 'Élèves',
                   route: '/students',
                   isActive: currentRoute == '/students',
                 ),
                 _DrawerItem(
                   icon: Icons.book_outlined,
-                  label: 'Matieres',
+                  label: 'Matières',
                   route: '/subjects',
                   isActive: currentRoute == '/subjects',
                 ),

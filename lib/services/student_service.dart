@@ -4,6 +4,12 @@ import 'package:uuid/uuid.dart';
 import '../models/student.dart';
 import '../utils/constants.dart';
 
+class DuplicateStudentMatriculeException implements Exception {
+  const DuplicateStudentMatriculeException(this.matricule);
+
+  final String matricule;
+}
+
 class StudentService {
   Box<Student> get _box => Hive.box<Student>(AppConstants.studentsBox);
 
@@ -52,9 +58,18 @@ class StudentService {
     required String classe,
     required String dateNaissance,
   }) async {
+    final normalizedMatricule = matricule.trim().toLowerCase();
+    final exists = _box.values.any(
+      (student) =>
+          student.matricule.trim().toLowerCase() == normalizedMatricule,
+    );
+    if (exists) {
+      throw DuplicateStudentMatriculeException(matricule.trim());
+    }
+
     final student = Student(
       id: _uuid.v4(),
-      matricule: matricule,
+      matricule: matricule.trim(),
       nom: nom,
       prenom: prenom,
       classe: classe,
@@ -66,6 +81,16 @@ class StudentService {
   }
 
   Future<void> update(Student student) async {
+    final normalizedMatricule = student.matricule.trim().toLowerCase();
+    final exists = _box.values.any(
+      (item) =>
+          item.id != student.id &&
+          item.matricule.trim().toLowerCase() == normalizedMatricule,
+    );
+    if (exists) {
+      throw DuplicateStudentMatriculeException(student.matricule.trim());
+    }
+
     await _box.put(student.id, student);
   }
 

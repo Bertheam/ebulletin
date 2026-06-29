@@ -2,13 +2,13 @@
 
 Application Flutter de gestion des bulletins scolaires
 
-## Fonctionnalites Phase I
+## Fonctionnalités Phase I
 
-- Tableau de bord avec statistiques et derniers eleves ajoutes
-- Gestion locale des eleves avec recherche, ajout, modification et suppression
-- Gestion locale des matieres avec coefficients et matieres par defaut
-- Saisie des notes par periode
-- Generation du bulletin avec moyenne ponderee, mention et rang
+- Tableau de bord avec statistiques et derniers élèves ajoutés
+- Gestion locale des élèves avec recherche, ajout, modification et suppression
+- Gestion locale des matières avec coefficients et matières par défaut
+- Saisie des notes par période
+- Génération du bulletin avec moyenne pondérée, mention et rang
 - Persistance locale avec Hive
 
 ## Stack
@@ -26,7 +26,7 @@ flutter pub get
 flutter run
 ```
 
-## Verification
+## Vérification
 
 ```bash
 flutter analyze

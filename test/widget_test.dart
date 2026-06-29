@@ -48,8 +48,8 @@ void main() {
 
     expect(find.text('Tableau de bord'), findsOneWidget);
     expect(find.text('eBulletin'), findsOneWidget);
-    expect(find.text('Derniers eleves ajoutes'), findsOneWidget);
-    expect(find.text('Aucun eleve enregistre.'), findsOneWidget);
+    expect(find.text('Derniers élèves ajoutés'), findsOneWidget);
+    expect(find.text('Aucun élève enregistré.'), findsOneWidget);
   });
 
   testWidgets('navigates through drawer routes', (WidgetTester tester) async {
@@ -60,23 +60,23 @@ void main() {
     await tester.tap(find.byTooltip('Open navigation menu'));
     await tester.pumpAndSettle();
     await tester.tap(
-      find.descendant(of: find.byType(Drawer), matching: find.text('Eleves')),
+      find.descendant(of: find.byType(Drawer), matching: find.text('Élèves')),
     );
     await tester.pumpAndSettle();
-    expect(find.text('Eleves (0)'), findsOneWidget);
+    expect(find.text('Élèves (0)'), findsOneWidget);
     expect(
-      find.text('Aucun eleve. Appuyez sur + pour en ajouter.'),
+      find.text('Aucun élève. Appuyez sur + pour en ajouter.'),
       findsOneWidget,
     );
 
     await tester.tap(find.byTooltip('Open navigation menu'));
     await tester.pumpAndSettle();
     await tester.tap(
-      find.descendant(of: find.byType(Drawer), matching: find.text('Matieres')),
+      find.descendant(of: find.byType(Drawer), matching: find.text('Matières')),
     );
     await tester.pumpAndSettle();
-    expect(find.text('Matieres (0)'), findsOneWidget);
-    expect(find.text('Aucune matiere.'), findsOneWidget);
+    expect(find.text('Matières (0)'), findsOneWidget);
+    expect(find.text('Aucune matière.'), findsOneWidget);
 
     await tester.tap(find.byTooltip('Open navigation menu'));
     await tester.pumpAndSettle();
@@ -98,7 +98,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Bulletins'), findsOneWidget);
     expect(
-      find.text('Selectionnez un eleve pour generer son bulletin.'),
+      find.text('Sélectionnez un élève pour générer son bulletin.'),
       findsOneWidget,
     );
   });

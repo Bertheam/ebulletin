@@ -68,12 +68,12 @@ void main() {
   test('generate computes moyenne mention and rank from stored data', () async {
     final math = await subjectService.add(
       code: 'MATH',
-      libelle: 'Mathematiques',
+      libelle: 'Mathématiques',
       coefficient: 4,
     );
     final french = await subjectService.add(
       code: 'FRAN',
-      libelle: 'Francais',
+      libelle: 'Français',
       coefficient: 2,
     );
 
@@ -126,10 +126,48 @@ void main() {
     expect(reportCard.moyenne, 14.0);
     expect(reportCard.mention, 'Bien');
     expect(reportCard.lines, hasLength(2));
-    expect(reportCard.lines.first.subject, 'Francais');
+    expect(reportCard.lines.first.subject, 'Français');
     expect(reportCard.lines.first.appreciation, 'Bon effort');
     expect(reportCard.lines.last.noteCoeff, 60.0);
     expect(ranks[studentA.id], 1);
     expect(ranks[studentB.id], 2);
+  });
+
+  test('student matricule must be unique', () async {
+    await studentService.add(
+      matricule: 'EL-001',
+      nom: 'Diallo',
+      prenom: 'Awa',
+      classe: 'Terminale A',
+      dateNaissance: '2005-02-01',
+    );
+
+    expect(
+      () => studentService.add(
+        matricule: 'EL-001',
+        nom: 'Traore',
+        prenom: 'Moussa',
+        classe: 'Terminale A',
+        dateNaissance: '2004-11-09',
+      ),
+      throwsA(isA<DuplicateStudentMatriculeException>()),
+    );
+  });
+
+  test('subject code must be unique', () async {
+    await subjectService.add(
+      code: 'MATH',
+      libelle: 'Mathématiques',
+      coefficient: 4,
+    );
+
+    expect(
+      () => subjectService.add(
+        code: 'MATH',
+        libelle: 'Maths avancees',
+        coefficient: 5,
+      ),
+      throwsA(isA<DuplicateSubjectCodeException>()),
+    );
   });
 }

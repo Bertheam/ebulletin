@@ -4,6 +4,12 @@ import 'package:uuid/uuid.dart';
 import '../models/subject.dart';
 import '../utils/constants.dart';
 
+class DuplicateSubjectCodeException implements Exception {
+  const DuplicateSubjectCodeException(this.code);
+
+  final String code;
+}
+
 class SubjectService {
   Box<Subject> get _box => Hive.box<Subject>(AppConstants.subjectsBox);
 
@@ -24,9 +30,17 @@ class SubjectService {
     required String libelle,
     required double coefficient,
   }) async {
+    final normalizedCode = code.trim().toUpperCase();
+    final exists = _box.values.any(
+      (subject) => subject.code.trim().toUpperCase() == normalizedCode,
+    );
+    if (exists) {
+      throw DuplicateSubjectCodeException(normalizedCode);
+    }
+
     final subject = Subject(
       id: _uuid.v4(),
-      code: code,
+      code: normalizedCode,
       libelle: libelle,
       coefficient: coefficient,
     );
@@ -36,6 +50,16 @@ class SubjectService {
   }
 
   Future<void> update(Subject subject) async {
+    final normalizedCode = subject.code.trim().toUpperCase();
+    final exists = _box.values.any(
+      (item) =>
+          item.id != subject.id &&
+          item.code.trim().toUpperCase() == normalizedCode,
+    );
+    if (exists) {
+      throw DuplicateSubjectCodeException(normalizedCode);
+    }
+
     await _box.put(subject.id, subject);
   }
 

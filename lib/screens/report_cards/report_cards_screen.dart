@@ -68,7 +68,7 @@ class _ReportCardsScreenState extends State<ReportCardsScreen> {
 
   Color _mentionColor(String mention) {
     switch (mention) {
-      case 'Tres Bien':
+      case 'Très Bien':
         return Colors.green.shade700;
       case 'Bien':
         return Colors.blue.shade700;
@@ -120,11 +120,11 @@ class _ReportCardsScreenState extends State<ReportCardsScreen> {
             DropdownButtonFormField<Student>(
               initialValue: _selectedStudent,
               decoration: const InputDecoration(
-                labelText: 'Selectionner un eleve',
+                labelText: 'Sélectionner un élève',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.person_outline),
               ),
-              hint: const Text('Choisir un eleve...'),
+              hint: const Text('Choisir un élève...'),
               items: _students
                   .map(
                     (student) => DropdownMenuItem<Student>(
@@ -142,7 +142,7 @@ class _ReportCardsScreenState extends State<ReportCardsScreen> {
             DropdownButtonFormField<String>(
               initialValue: _selectedPeriode,
               decoration: const InputDecoration(
-                labelText: 'Periode',
+                labelText: 'Période',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.calendar_today_outlined),
               ),
@@ -169,7 +169,7 @@ class _ReportCardsScreenState extends State<ReportCardsScreen> {
                       Icon(Icons.bar_chart, size: 64, color: Colors.grey),
                       SizedBox(height: 12),
                       Text(
-                        'Selectionnez un eleve pour generer son bulletin.',
+                        'Sélectionnez un élève pour générer son bulletin.',
                         style: TextStyle(color: Colors.grey),
                         textAlign: TextAlign.center,
                       ),
@@ -182,7 +182,7 @@ class _ReportCardsScreenState extends State<ReportCardsScreen> {
                 child: Padding(
                   padding: EdgeInsets.all(32),
                   child: Text(
-                    'Aucune note pour cette periode.',
+                    'Aucune note pour cette période.',
                     style: TextStyle(color: Colors.grey),
                   ),
                 ),
@@ -228,7 +228,7 @@ class _ReportCardsScreenState extends State<ReportCardsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Eleve : ${_reportCard!.student}',
+                      'Élève : ${_reportCard!.student}',
                       style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                     Text('Matricule : ${_reportCard!.matricule}'),
@@ -252,7 +252,7 @@ class _ReportCardsScreenState extends State<ReportCardsScreen> {
                           Expanded(
                             flex: 4,
                             child: Text(
-                              'Matiere',
+                              'Matière',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),

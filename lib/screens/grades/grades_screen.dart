@@ -48,7 +48,7 @@ class _GradesScreenState extends State<GradesScreen> {
     try {
       return _students.firstWhere((student) => student.id == id).fullName;
     } catch (_) {
-      return 'Eleve inconnu';
+      return 'Élève inconnu';
     }
   }
 
@@ -56,7 +56,7 @@ class _GradesScreenState extends State<GradesScreen> {
     try {
       return _subjects.firstWhere((subject) => subject.id == id).libelle;
     } catch (_) {
-      return 'Matiere inconnue';
+      return 'Matière inconnue';
     }
   }
 
@@ -92,7 +92,7 @@ class _GradesScreenState extends State<GradesScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Supprimer la note'),
-        content: const Text('Supprimer cette note definitivement ?'),
+        content: const Text('Supprimer cette note définitivement ?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -312,7 +312,7 @@ class _GradeFormState extends State<_GradeForm> {
     }
     if (_studentId == null || _subjectId == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Selectionnez un eleve et une matiere')),
+        const SnackBar(content: Text('Sélectionnez un élève et une matière')),
       );
       return;
     }
@@ -371,10 +371,10 @@ class _GradeFormState extends State<_GradeForm> {
               DropdownButtonFormField<String>(
                 initialValue: _studentId,
                 decoration: const InputDecoration(
-                  labelText: 'Eleve *',
+                  labelText: 'Élève *',
                   border: OutlineInputBorder(),
                 ),
-                hint: const Text('Choisir un eleve'),
+                hint: const Text('Choisir un élève'),
                 items: widget.students
                     .map(
                       (student) => DropdownMenuItem(
@@ -385,16 +385,16 @@ class _GradeFormState extends State<_GradeForm> {
                     .toList(),
                 onChanged: (value) => setState(() => _studentId = value),
                 validator: (value) =>
-                    value == null ? 'Selectionnez un eleve' : null,
+                    value == null ? 'Sélectionnez un élève' : null,
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
                 initialValue: _subjectId,
                 decoration: const InputDecoration(
-                  labelText: 'Matiere *',
+                  labelText: 'Matière *',
                   border: OutlineInputBorder(),
                 ),
-                hint: const Text('Choisir une matiere'),
+                hint: const Text('Choisir une matière'),
                 items: widget.subjects
                     .map(
                       (subject) => DropdownMenuItem(
@@ -407,13 +407,13 @@ class _GradeFormState extends State<_GradeForm> {
                     .toList(),
                 onChanged: (value) => setState(() => _subjectId = value),
                 validator: (value) =>
-                    value == null ? 'Selectionnez une matiere' : null,
+                    value == null ? 'Sélectionnez une matière' : null,
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
                 initialValue: _periode,
                 decoration: const InputDecoration(
-                  labelText: 'Periode *',
+                  labelText: 'Période *',
                   border: OutlineInputBorder(),
                 ),
                 items: AppConstants.periodes
@@ -451,7 +451,7 @@ class _GradeFormState extends State<_GradeForm> {
               TextFormField(
                 controller: _appCtrl,
                 decoration: const InputDecoration(
-                  labelText: 'Appreciation (optionnelle)',
+                  labelText: 'Appréciation (optionnelle)',
                   border: OutlineInputBorder(),
                 ),
                 maxLines: 2,

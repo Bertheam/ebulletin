@@ -104,7 +104,7 @@ class ReportCardService {
 
   String getMention(double moyenne) {
     if (moyenne >= 16) {
-      return 'Tres Bien';
+      return 'Très Bien';
     }
     if (moyenne >= 14) {
       return 'Bien';
@@ -123,7 +123,7 @@ class ReportCardService {
       return 'Excellent';
     }
     if (note >= 16) {
-      return 'Tres bien';
+      return 'Très bien';
     }
     if (note >= 14) {
       return 'Bien';

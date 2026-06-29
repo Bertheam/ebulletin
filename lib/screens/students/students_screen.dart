@@ -66,7 +66,7 @@ class _StudentsScreenState extends State<StudentsScreen> {
       builder: (context) => AlertDialog(
         title: const Text('Confirmer la suppression'),
         content: Text(
-          'Supprimer ${student.fullName} ?\nCette action est irreversible.',
+          'Supprimer ${student.fullName} ?\nCette action est irréversible.',
         ),
         actions: [
           TextButton(
@@ -80,7 +80,7 @@ class _StudentsScreenState extends State<StudentsScreen> {
               _load();
               messenger.showSnackBar(
                 const SnackBar(
-                  content: Text('Eleve supprime'),
+                  content: Text('Élève supprimé'),
                   backgroundColor: Colors.red,
                 ),
               );
@@ -96,7 +96,7 @@ class _StudentsScreenState extends State<StudentsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Eleves (${_all.length})'),
+        title: Text('Élèves (${_all.length})'),
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
       ),
@@ -133,8 +133,8 @@ class _StudentsScreenState extends State<StudentsScreen> {
                 ? EmptyState(
                     icon: Icons.people_outline,
                     message: _searchCtrl.text.isNotEmpty
-                        ? 'Aucun resultat pour "${_searchCtrl.text}"'
-                        : 'Aucun eleve. Appuyez sur + pour en ajouter.',
+                        ? 'Aucun résultat pour "${_searchCtrl.text}"'
+                        : 'Aucun élève. Appuyez sur + pour en ajouter.',
                   )
                 : ListView.builder(
                     itemCount: _displayed.length,
@@ -243,25 +243,34 @@ class _StudentFormState extends State<_StudentForm> {
     }
 
     setState(() => _saving = true);
+    final messenger = ScaffoldMessenger.of(context);
 
-    if (widget.student == null) {
-      await _service.add(
-        matricule: _matricCtrl.text.trim(),
-        nom: _nomCtrl.text.trim(),
-        prenom: _prenomCtrl.text.trim(),
-        classe: _classe,
-        dateNaissance: _dateCtrl.text,
-      );
-    } else {
-      await _service.update(
-        widget.student!.copyWith(
+    try {
+      if (widget.student == null) {
+        await _service.add(
           matricule: _matricCtrl.text.trim(),
           nom: _nomCtrl.text.trim(),
           prenom: _prenomCtrl.text.trim(),
           classe: _classe,
           dateNaissance: _dateCtrl.text,
-        ),
+        );
+      } else {
+        await _service.update(
+          widget.student!.copyWith(
+            matricule: _matricCtrl.text.trim(),
+            nom: _nomCtrl.text.trim(),
+            prenom: _prenomCtrl.text.trim(),
+            classe: _classe,
+            dateNaissance: _dateCtrl.text,
+          ),
+        );
+      }
+    } on DuplicateStudentMatriculeException catch (error) {
+      setState(() => _saving = false);
+      messenger.showSnackBar(
+        SnackBar(content: Text('Matricule déjà utilisé : ${error.matricule}')),
       );
+      return;
     }
 
     if (mounted) {
@@ -285,8 +294,8 @@ class _StudentFormState extends State<_StudentForm> {
             children: [
               Text(
                 widget.student == null
-                    ? 'Ajouter un eleve'
-                    : 'Modifier l\'eleve',
+                    ? 'Ajouter un élève'
+                    : 'Modifier l\'élève',
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -318,7 +327,7 @@ class _StudentFormState extends State<_StudentForm> {
               TextFormField(
                 controller: _prenomCtrl,
                 decoration: const InputDecoration(
-                  labelText: 'Prenom *',
+                  labelText: 'Prénom *',
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) =>

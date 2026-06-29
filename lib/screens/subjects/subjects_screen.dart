@@ -51,7 +51,7 @@ class _SubjectsScreenState extends State<SubjectsScreen> {
     showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Supprimer la matiere'),
+        title: const Text('Supprimer la matière'),
         content: Text('Supprimer ${subject.libelle} ?'),
         actions: [
           TextButton(
@@ -75,7 +75,7 @@ class _SubjectsScreenState extends State<SubjectsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Matieres (${_subjects.length})'),
+        title: Text('Matières (${_subjects.length})'),
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
       ),
@@ -83,7 +83,7 @@ class _SubjectsScreenState extends State<SubjectsScreen> {
       body: _subjects.isEmpty
           ? const EmptyState(
               icon: Icons.book_outlined,
-              message: 'Aucune matiere.',
+              message: 'Aucune matière.',
             )
           : ListView.builder(
               itemCount: _subjects.length,
@@ -206,21 +206,30 @@ class _SubjectFormState extends State<_SubjectForm> {
 
     setState(() => _saving = true);
     final coeff = double.tryParse(_coeffCtrl.text) ?? 1.0;
+    final messenger = ScaffoldMessenger.of(context);
 
-    if (widget.subject == null) {
-      await _service.add(
-        code: _codeCtrl.text.trim().toUpperCase(),
-        libelle: _libCtrl.text.trim(),
-        coefficient: coeff,
-      );
-    } else {
-      await _service.update(
-        widget.subject!.copyWith(
+    try {
+      if (widget.subject == null) {
+        await _service.add(
           code: _codeCtrl.text.trim().toUpperCase(),
           libelle: _libCtrl.text.trim(),
           coefficient: coeff,
-        ),
+        );
+      } else {
+        await _service.update(
+          widget.subject!.copyWith(
+            code: _codeCtrl.text.trim().toUpperCase(),
+            libelle: _libCtrl.text.trim(),
+            coefficient: coeff,
+          ),
+        );
+      }
+    } on DuplicateSubjectCodeException catch (error) {
+      setState(() => _saving = false);
+      messenger.showSnackBar(
+        SnackBar(content: Text('Code matière déjà utilisé : ${error.code}')),
       );
+      return;
     }
 
     if (mounted) {
@@ -243,8 +252,8 @@ class _SubjectFormState extends State<_SubjectForm> {
           children: [
             Text(
               widget.subject == null
-                  ? 'Ajouter une matiere'
-                  : 'Modifier la matiere',
+                  ? 'Ajouter une matière'
+                  : 'Modifier la matière',
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const Divider(),
@@ -264,7 +273,7 @@ class _SubjectFormState extends State<_SubjectForm> {
             TextFormField(
               controller: _libCtrl,
               decoration: const InputDecoration(
-                labelText: 'Libelle *',
+                labelText: 'Libellé *',
                 border: OutlineInputBorder(),
               ),
               validator: (value) =>

@@ -90,13 +90,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 childAspectRatio: 1.3,
                 children: [
                   StatCard(
-                    label: 'Eleves',
+                    label: 'Élèves',
                     value: _totalStudents,
                     icon: Icons.people,
                     color: colorScheme.primary,
                   ),
                   StatCard(
-                    label: 'Matieres',
+                    label: 'Matières',
                     value: _totalSubjects,
                     icon: Icons.book,
                     color: colorScheme.secondary,
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 24),
               const Text(
-                'Derniers eleves ajoutes',
+                'Derniers élèves ajoutés',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
@@ -127,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(24),
                     child: Center(
                       child: Text(
-                        'Aucun eleve enregistre.',
+                        'Aucun élève enregistré.',
                         style: TextStyle(color: Colors.grey.shade500),
                       ),
                     ),

@@ -17,20 +17,20 @@ class AppConstants {
     '4eme',
     '3eme',
     'Seconde',
-    'Premiere',
+    'Première',
     'Terminale A',
     'Terminale C',
     'Terminale D',
   ];
 
   static const List<Map<String, dynamic>> defaultSubjects = [
-    {'code': 'MATH', 'libelle': 'Mathematiques', 'coefficient': 4.0},
+    {'code': 'MATH', 'libelle': 'Mathématiques', 'coefficient': 4.0},
     {'code': 'PHYS', 'libelle': 'Physique-Chimie', 'coefficient': 3.0},
     {'code': 'SVT', 'libelle': 'Sciences de la Vie', 'coefficient': 2.0},
-    {'code': 'FRAN', 'libelle': 'Francais', 'coefficient': 4.0},
-    {'code': 'HIST', 'libelle': 'Histoire-Geographie', 'coefficient': 2.0},
+    {'code': 'FRAN', 'libelle': 'Français', 'coefficient': 4.0},
+    {'code': 'HIST', 'libelle': 'Histoire-Géographie', 'coefficient': 2.0},
     {'code': 'ANGL', 'libelle': 'Anglais', 'coefficient': 3.0},
-    {'code': 'EPS', 'libelle': 'Education Physique', 'coefficient': 1.0},
+    {'code': 'EPS', 'libelle': 'Éducation Physique', 'coefficient': 1.0},
   ];
 
   static const int primaryColor = 0xFF0553B1;
