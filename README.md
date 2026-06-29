@@ -1,16 +1,34 @@
-# ebulletin
+# eBulletin
 
-A new Flutter project.
+Application Flutter de gestion des bulletins scolaires
 
-## Getting Started
+## Fonctionnalites Phase I
 
-This project is a starting point for a Flutter application.
+- Tableau de bord avec statistiques et derniers eleves ajoutes
+- Gestion locale des eleves avec recherche, ajout, modification et suppression
+- Gestion locale des matieres avec coefficients et matieres par defaut
+- Saisie des notes par periode
+- Generation du bulletin avec moyenne ponderee, mention et rang
+- Persistance locale avec Hive
 
-A few resources to get you started if this is your first Flutter project:
+## Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter 3.x
+- Dart 3.x
+- Material 3
+- Hive / hive_flutter
+- SharedPreferences
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Lancement
+
+```bash
+flutter pub get
+flutter run
+```
+
+## Verification
+
+```bash
+flutter analyze
+flutter test
+```

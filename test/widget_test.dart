@@ -86,5 +86,20 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Notes (0)'), findsOneWidget);
     expect(find.text('Aucune note pour Trimestre 1'), findsOneWidget);
+
+    await tester.tap(find.byTooltip('Open navigation menu'));
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.descendant(
+        of: find.byType(Drawer),
+        matching: find.text('Bulletins'),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Bulletins'), findsOneWidget);
+    expect(
+      find.text('Selectionnez un eleve pour generer son bulletin.'),
+      findsOneWidget,
+    );
   });
 }
