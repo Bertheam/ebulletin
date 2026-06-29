@@ -75,10 +75,8 @@ void main() {
       find.descendant(of: find.byType(Drawer), matching: find.text('Matieres')),
     );
     await tester.pumpAndSettle();
-    expect(
-      find.text("L'ecran de gestion des matieres sera implemente dans EB-7."),
-      findsOneWidget,
-    );
+    expect(find.text('Matieres (0)'), findsOneWidget);
+    expect(find.text('Aucune matiere.'), findsOneWidget);
 
     await tester.tap(find.byTooltip('Open navigation menu'));
     await tester.pumpAndSettle();
